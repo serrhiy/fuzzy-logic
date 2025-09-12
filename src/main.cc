@@ -1,9 +1,10 @@
 #include <matplot/freestanding/plot.h>
+#include <matplot/util/common.h>
 
 #include <vector>
 #include <numbers>
 #include <cmath>
-#include <ranges>
+#include <utility>
 
 int main(const int argc, const char* argv[]) {
   std::vector<double> x_numbers;
