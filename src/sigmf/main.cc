@@ -42,7 +42,7 @@ int main(const int argc, const char* argv[]) {
   const std::vector<double> y_numbers1 =
     x_numbers | std::views::transform(makeSigmf(-1, 3)) | std::ranges::to<std::vector>();
   const std::vector<double> y_numbers2 =
-    x_numbers | std::views::transform(makeDsigmf(20, -8, 3, 9)) | std::ranges::to<std::vector>();
+    x_numbers | std::views::transform(makeDsigmf(10, -8, 10, 8)) | std::ranges::to<std::vector>();
   const std::vector<double> y_numbers3 = x_numbers |
                                          std::views::transform(makePsigmf(2.5, -8.5, -11, 7)) |
                                          std::ranges::to<std::vector>();
