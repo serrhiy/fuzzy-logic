@@ -17,7 +17,8 @@
         "VCPKG_ROOT": "<path to vcpkg>"
       },
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "Release"
+        "CMAKE_BUILD_TYPE": "Release",
+        "CMAKE_INSTALL_PREFIX": "bin"
       }
     },
     {
@@ -28,7 +29,9 @@
       },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "include-what-you-use"
+        "CMAKE_CXX_INCLUDE_WHAT_YOU_USE": "include-what-you-use",
+        "CMAKE_CXX_COMPILER": "/usr/bin/g++",
+        "CMAKE_INSTALL_PREFIX": "bin"
       }
     }
   ]
@@ -39,5 +42,7 @@
 
 ```shell
 cmake --preset=release # or debug
-cmake --build build
+cmake --build build --target install
 ```
+
+4. Run binaries in `bin` folder.
