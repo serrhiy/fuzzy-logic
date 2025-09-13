@@ -4,3 +4,4 @@ set_target_properties(trimf PROPERTIES CXX_EXTENSIONS OFF)
 
 find_package(Matplot++ CONFIG REQUIRED)
 target_link_libraries(trimf PRIVATE Matplot++::cimg Matplot++::matplot)
+install(TARGETS trimf RUNTIME DESTINATION .)
