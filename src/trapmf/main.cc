@@ -5,9 +5,9 @@
 
 #include <memory>
 #include <vector>
-#include <utility>
 #include <ranges>
 #include <functional>
+#include <algorithm>
 
 double trapmf(double x, double a, double b, double c, double d) {
   if (x < a) return 0.0;

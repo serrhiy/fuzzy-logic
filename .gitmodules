@@ -1,3 +1,3 @@
 [submodule "cpp-linters"]
 	path = cpp-linters
-	url = https://github.com/serrhiy/cpp-linters.git
+	url = git@github.com:serrhiy/cpp-linters.git
