@@ -11,6 +11,7 @@
 #include <functional>
 #include <algorithm>
 #include <cmath>
+#include <string>
 
 double gaussmf(const double x, const double c, const double sig) {
   return std::exp(-((x - c) * (x - c)) / (2 * sig * sig));
@@ -31,7 +32,7 @@ int main(const int argc, const char* argv[]) {
   const std::vector<double> y_numbers1 =
     x_numbers | std::views::transform(makeGauss2mf(-4, 3, 2, 1.5)) | std::ranges::to<std::vector>();
   const std::vector<double> y_numbers2 =
-    x_numbers | std::views::transform(makeGauss2mf(-1, 4, 5, 0.5)) | std::ranges::to<std::vector>();
+    x_numbers | std::views::transform(makeGauss2mf(-7, 0.5, 5, 3)) | std::ranges::to<std::vector>();
 
   matplot::hold(true);
   matplot::plot(x_numbers, y_numbers1)->line_width(2);
@@ -40,6 +41,7 @@ int main(const int argc, const char* argv[]) {
   matplot::grid(true);
   matplot::gca()->minor_grid(true);
   matplot::title("Gaussian 2 membership function");
+  matplot::legend(matplot::gca(), { "gauss2mf(x, -4, 3, 2, 1.5)", "gauss2mf(x, -7, 0.5, 5, 3)" });
   matplot::show();
   return 0;
 }
