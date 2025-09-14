@@ -67,7 +67,7 @@ int main(const int argc, const char* argv[]) {
   matplot::plot(x_numbers, y_numbers2, "--")->line_width(2);
   matplot::plot(x_numbers, unionn)->line_width(3);
   matplot::title("Union(max)");
-  matplot::legend(ax2, { label1, label2, "Union" });
+  matplot::legend(ax2, { label1, label2, "Disjunction" });
 
   for (const auto& axis: { ax1, ax2 }) {
     matplot::ylim(axis, { 0, 1.1 });
