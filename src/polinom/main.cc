@@ -17,29 +17,21 @@
 
 double zmf(double x, double a, double b) {
   if (x <= a) return 1;
-  if (a <= x && x <= (a + b) / 2) {
-    return 1 - 2 * std::pow((x - a) / (b - a), 2);
-  }
-  if ((a + b) / 2.0 <= x && x <= b) {
-    return 2 * std::pow((x - b) / (b - a), 2);
-  }
+  if (a <= x && x <= (a + b) / 2) { return 1 - 2 * std::pow((x - a) / (b - a), 2); }
+  if ((a + b) / 2.0 <= x && x <= b) { return 2 * std::pow((x - b) / (b - a), 2); }
   return 0.0;
 }
 
 double smf(double x, double a, double b) {
   if (x <= a) return 0;
-  if (a <= x && x <= (a + b) / 2) {
-    return 2 * std::pow((x - a) / (b - a), 2);
-  }
-  if ((a + b) / 2 <= x && x <= b) {
-    return 1 - 2 * std::pow((x - b) / (b - a), 2);
-  }
+  if (a <= x && x <= (a + b) / 2) { return 2 * std::pow((x - a) / (b - a), 2); }
+  if ((a + b) / 2 <= x && x <= b) { return 1 - 2 * std::pow((x - b) / (b - a), 2); }
   return 1;
 }
 
 double pimf(double x, double a, double b, double c, double d) {
   if (x >= d) return 0;
-  return x <= (a + b) / 2 ? smf(x, a, b) : zmf(x, c, d);  
+  return x <= (a + b) / 2 ? smf(x, a, b) : zmf(x, c, d);
 }
 
 std::function<double(double)> makeZmf(double a, double b) {
@@ -60,9 +52,8 @@ int main(const int argc, const char* argv[]) {
     x_numbers | std::views::transform(makeZmf(-10, 10)) | std::ranges::to<std::vector>();
   const std::vector<double> y_numbers2 =
     x_numbers | std::views::transform(makeSmf(-10, 10)) | std::ranges::to<std::vector>();
-  const std::vector<double> y_numbers3 = x_numbers |
-                                         std::views::transform(makePimf(-10, -3, 3, 10)) |
-                                         std::ranges::to<std::vector>();
+  const std::vector<double> y_numbers3 =
+    x_numbers | std::views::transform(makePimf(-10, -3, 3, 10)) | std::ranges::to<std::vector>();
 
   matplot::figure()->size(800, 600);
 
