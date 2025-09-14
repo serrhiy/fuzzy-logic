@@ -1,20 +1,20 @@
-#include <matplot/freestanding/plot.h>
 #include <matplot/axes_objects/line.h>
-#include <matplot/freestanding/axes_lim.h>
-#include <matplot/util/common.h>
 #include <matplot/core/axes_type.h>
-#include <matplot/freestanding/axes_functions.h>
 #include <matplot/core/figure_registry.h>
 #include <matplot/core/figure_type.h>
+#include <matplot/freestanding/axes_functions.h>
+#include <matplot/freestanding/axes_lim.h>
+#include <matplot/freestanding/plot.h>
+#include <matplot/util/common.h>
 
-#include <memory>
-#include <vector>
-#include <ranges>
-#include <functional>
 #include <algorithm>
 #include <cmath>
-#include <initializer_list>
 #include <format>
+#include <functional>
+#include <initializer_list>
+#include <memory>
+#include <ranges>
+#include <vector>
 
 using math_fn = std::function<double(double)>;
 
@@ -33,7 +33,7 @@ double gaussmf(double x, double c, double sig) {
   return std::exp(-((x - c) * (x - c)) / (2 * sig * sig));
 }
 
-std::function<double(double)> makeGaussmf(const double c, const double sig) {
+std::function<double(double)> makeGaussmf(double c, double sig) {
   return [c, sig](double x) -> double { return gaussmf(x, c, sig); };
 }
 
@@ -46,11 +46,14 @@ int main(const int argc, const char* argv[]) {
   const auto f2 = makeGaussmf(c2, sig2);
 
   const std::vector<double> x_numbers = matplot::linspace(-15, 15);
-  const std::vector<double> y_numbers1 = x_numbers | transform(f1) | to<std::vector>();
-  const std::vector<double> y_numbers2 = x_numbers | transform(f2) | to<std::vector>();
+  const std::vector<double> y_numbers1 =
+      x_numbers | transform(f1) | to<std::vector>();
+  const std::vector<double> y_numbers2 =
+      x_numbers | transform(f2) | to<std::vector>();
   const std::vector<double> intersection =
-    x_numbers | transform(conjunction(f1, f2)) | to<std::vector>();
-  const std::vector<double> unionn = x_numbers | transform(disjunction(f1, f2)) | to<std::vector>();
+      x_numbers | transform(conjunction(f1, f2)) | to<std::vector>();
+  const std::vector<double> unionn =
+      x_numbers | transform(disjunction(f1, f2)) | to<std::vector>();
 
   matplot::figure()->size(800, 600);
 
@@ -62,7 +65,7 @@ int main(const int argc, const char* argv[]) {
   matplot::title("Intersection(y1 * y2)");
   const std::string label1 = std::format("gaussmf(x, {}, {})", c1, sig1);
   const std::string label2 = std::format("gaussmf(x, {}, {})", c2, sig2);
-  matplot::legend(ax1, { label1, label2, "Conjunction" });
+  matplot::legend(ax1, {label1, label2, "Conjunction"});
 
   auto ax2 = matplot::subplot(2, 1, 1);
   matplot::hold(true);
@@ -70,10 +73,10 @@ int main(const int argc, const char* argv[]) {
   matplot::plot(x_numbers, y_numbers2, "--")->line_width(2);
   matplot::plot(x_numbers, unionn)->line_width(3);
   matplot::title("Union(y1 + y2 - y1 * y2)");
-  matplot::legend(ax2, { label1, label2, "Union" });
+  matplot::legend(ax2, {label1, label2, "Union"});
 
-  for (const auto& axis: { ax1, ax2 }) {
-    matplot::ylim(axis, { 0, 1.1 });
+  for (const auto& axis : {ax1, ax2}) {
+    matplot::ylim(axis, {0, 1.1});
     matplot::grid(axis, true);
     axis->minor_grid(true);
   }

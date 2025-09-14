@@ -1,1 +1,1 @@
-./cpp-linters/format.py -psrc
+./cpp-linters/format.py -psrc --preset=Google
